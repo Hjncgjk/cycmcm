@@ -1,165 +1,188 @@
 % ============================================================
-% 主文件 main.tex
-% 心河大学学位论文 LaTeX 模板
+% 中青杯全国大学生数学建模竞赛论文模板
 % ============================================================
 
-% ------------------------------------------------------------
-% 文档类选择
-% ------------------------------------------------------------
-% 可选参数:
-%   - print: 双面打印模式
-%   - draft: 草稿模式 (显示溢出框)
-% ------------------------------------------------------------
-\documentclass{main}
-% \documentclass[print]{main}  % 双面打印版本
+\documentclass[a4paper]{article}
+\usepackage[UTF8]{ctex}
+\usepackage{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{setspace}
+\usepackage{indentfirst}
+\usepackage{enumitem}
 
-% ------------------------------------------------------------
-% 论文基本信息设置
-% ------------------------------------------------------------
-\title{基于LaTeX的学位论文排版系统研究}
-\author{张三}
-\university{XX大学}
-\college{计算机科学与技术学院}
-\major{计算机科学与技术}
-\advisor{李四教授}
-\studentid{2024123456}
-\degree{硕士学位论文}
-\submitdate{2026年3月}
+% ============================================================
+% 页面设置
+% ============================================================
+\geometry{a4paper,left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
 
-% ------------------------------------------------------------
-% 加载额外宏包 (根据需要在导言区添加)
-% ------------------------------------------------------------
-% \usepackage{...}
+% 1.25倍行距
+\renewcommand{\baselinestretch}{1.25}
 
-% ------------------------------------------------------------
-% 参考文献数据库
-% ------------------------------------------------------------
-% 使用 natbib + bibtex，无需此行
-% \addbibresource{references.bib}  % 这是 biblatex 的命令
+% 段落首行缩进2字符
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0pt}
 
-% ------------------------------------------------------------
-% 引用格式设置
-% ------------------------------------------------------------
-% 上标引用显示带方括号的 [1] 格式
-\renewcommand*{\citenumfont}[1]{[#1]}
+% ============================================================
+% 页眉页脚
+% ============================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyfoot[C]{\thepage}
+    \renewcommand{\headrulewidth}{0pt}
+}
+
+% ============================================================
+% 标题格式
+% ============================================================
+\titleformat{\section}
+    {\centering\zihao{-3}\bfseries}
+    {\chinese{section}、}{0pt}{}
+\titlespacing*{\section}{0pt}{20pt}{10pt}
+
+\titleformat{\subsection}
+    {\normalsize\bfseries}
+    {\thesubsection}{1em}{}
+\titlespacing*{\subsection}{0pt}{12pt}{6pt}
+
+\titleformat{\subsubsection}
+    {\normalsize\bfseries}
+    {\thesubsubsection}{1em}{}
+\titlespacing*{\subsubsection}{0pt}{10pt}{5pt}
+
+\renewcommand{\thesection}{\chinese{section}}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\arabic{section}.\arabic{subsection}.\arabic{subsubsection}}
+
+% ============================================================
+% 图表标题格式
+% ============================================================
+\captionsetup{
+    labelsep=space,
+    justification=centering,
+    font=normalsize
+}
+
+\setlist{leftmargin=2em,itemindent=0pt,parsep=0pt,topsep=0pt,partopsep=0pt}
 
 % ============================================================
 % 正文开始
 % ============================================================
 \begin{document}
 
-% ------------------------------------------------------------
-% 封面
-% ------------------------------------------------------------
-\begin{titlepage}
+% ============================================================
+% 第一页：摘要页
+% ============================================================
+\thispagestyle{plain}
+\setcounter{page}{1}
+
+% 论文题目：三号，不加粗
+\begin{center}
+    {\zihao{3} 基于K-means和BP神经网络的智能养老辅助系统研究}
+\end{center}
+
+% “摘要”二字：四号，不加粗
+\begin{center}
+    \zihao{4} 摘要
+\end{center}
+
+随着全球人口老龄化的加速，智能养老服务的需求日益增加。本文建立了K-means+BP神经网络的组合模型以及支持向量机SVM模型，解决了不同区域养老服务需求预测问题。模型评估采用R²和RMSE，结果验证了模型的可靠性。
+
+\vspace{0.5cm}
+
+\noindent\textbf{关键词：} K-means聚类；BP神经网络；支持向量机
+
+\newpage
+
+% ============================================================
+% 正文
+% ============================================================
+
+\section{问题重述}
+
+\subsection{问题背景}
+
+人口老龄化是全球性问题。根据联合国数据，全球65岁及以上人口正在迅速增加。
+
+\subsection{问题提出}
+
+如何利用人工智能技术，为不同区域的老年人提供个性化养老服务。
+
+\section{模型假设}
+
+\begin{enumerate}
+    \item 假设各地区经济水平保持稳定。
+    \item 假设养老服务体系不会发生巨大变化。
+    \item 假设数据准确可靠。
+\end{enumerate}
+
+\section{符号说明}
+
+\begin{table}[H]
     \centering
-    \vspace*{1cm}
-    
-    % 学校名称
-    {\zihao{-2}\bfseries 心河大学}
-    
-    \vspace{1.5cm}
-    
-    % 学位类型
-    {\zihao{2}\bfseries 硕士学位论文}
-    
-    \vspace{3cm}
-    
-    % 论文题目
-    {\zihao{-2}\bfseries 基于LaTeX的学位论文排版系统研究}
-    
-    \vspace{4cm}
-    
-    % 作者信息
-    {\zihao{4}
-    \begin{tabular}{rl}
-        \textbf{学院名称：} & 计算机科学与技术学院 \\[0.8cm]
-        \textbf{专业名称：} & 计算机科学与技术 \\[0.8cm]
-        \textbf{作者姓名：} & 张三 \\[0.8cm]
-        \textbf{学\qquad 号：} & 2024123456 \\[0.8cm]
-        \textbf{指导教师：} & 李四教授 \\[0.8cm]
+    \begin{tabular}{|c|c|}
+        \hline
+        \textbf{符号} & \textbf{含义} \\
+        \hline
+        $m_j$ & 簇中心 \\
+        $C$ & 惩罚因子 \\
+        \hline
     \end{tabular}
-    }
-    
-    \vfill
-    
-    % 提交日期
-    {\zihao{4}\bfseries 2026年3月}
-    
-\end{titlepage}
+\end{table}
 
-% ------------------------------------------------------------
-% 原创性声明 (可根据学校要求添加)
-% ------------------------------------------------------------
-% \input{chapters/declaration}
+\section{模型的建立与求解}
 
-% ------------------------------------------------------------
-% 摘要
-% ------------------------------------------------------------
-\frontmatter
-\input{chapters/abstract}
+\subsection{K-means模型}
 
-% ------------------------------------------------------------
-% 目录
-% ------------------------------------------------------------
-\clearpage  % 分页，目录从新页开始
-\tableofcontents
+K-means是常用聚类算法。距离公式如下：
 
-% ------------------------------------------------------------
-% 插图清单 (可选)
-% ------------------------------------------------------------
-% \listoffigures
-% \addcontentsline{toc}{chapter}{插图清单}
+\[
+distance(x_i,m_j) = \|x_i - m_j\| \tag{1}
+\]
 
-% ------------------------------------------------------------
-% 表格清单 (可选)
-% ------------------------------------------------------------
-% \listoftables
-% \addcontentsline{toc}{chapter}{表格清单}
+\subsection{BP神经网络模型}
 
-% ------------------------------------------------------------
-% 主要符号表 (可选)
-% ------------------------------------------------------------
-% \input{chapters/symbols}
+BP神经网络用于分类预测。模型结果如表1所示：
 
-% ------------------------------------------------------------
-% 正文部分
-% ------------------------------------------------------------
-\mainmatter
+\begin{table}[H]
+    \centering
+    \caption{模型结果}
+    \begin{tabular}{|c|c|}
+        \hline
+        \textbf{R²} & \textbf{RMSE} \\
+        \hline
+        0.96326 & 1.7042 \\
+        \hline
+    \end{tabular}
+\end{table}
 
-% 各章节文件引入
-\input{chapters/chapter1}
-\input{chapters/chapter2}
+\section{结论}
 
-% ------------------------------------------------------------
-% 结论
-% ------------------------------------------------------------
-\input{chapters/conclusion}
+本文建立的模型具有良好的拟合度和预测准确性。
 
-% ------------------------------------------------------------
+% ============================================================
 % 参考文献
-% ------------------------------------------------------------
-\backmatter
-\bibliographystyle{gbt7714-numerical}  % 国标GB/T 7714-2015 顺序编码制
-\bibliography{references}
+% ============================================================
+\begin{thebibliography}{99}
+    \bibitem{1} 黄韬.基于k-means聚类算法的研究[J].计算机技术与发展,2011.
+    \bibitem{2} 李萍.基于MATLAB的BP神经网络预测系统的设计[J].计算机应用与软件,2008.
+\end{thebibliography}
 
-% ------------------------------------------------------------
-% 附录 (可选)
-% ------------------------------------------------------------
 \appendix
-\input{chapters/appendix}
+\section{附录}
 
-% ------------------------------------------------------------
-% 致谢
-% ------------------------------------------------------------
-\input{chapters/acknowledgement}
-
-% ------------------------------------------------------------
-% 攻读学位期间取得的成果 (可选)
-% ------------------------------------------------------------
-% \input{chapters/publications}
+附录内容：相关代码和数据表。
 
 \end{document}
-% ============================================================
-% 文档结束
-% ============================================================
